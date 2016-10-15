@@ -2,18 +2,25 @@ package test.cbuitest;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     MyCustomView customView;
+    ImageView imageView;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +29,36 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.textView);
         customView = (MyCustomView) findViewById(R.id.myCsutomView);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                animate();
+                startTransition();
             }
         });
+    }
+
+    private void startReveal() {
+
+        Animator animator = ViewAnimationUtils.createCircularReveal(imageView, imageView.getMeasuredWidth() / 2, imageView.getMeasuredHeight() / 2, 0, 600);
+        animator.setDuration(1000);
+        imageView.setVisibility(View.VISIBLE);
+        animator.start();
+
+    }
+
+    private void startTransition() {
+        Intent intent = new Intent(this, SecondActivity.class);
+//        ActivityOptions options =
+//                ActivityOptions.makeSceneTransitionAnimation(this,
+//                        imageView,
+//                        "image1");
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
+                Pair.create((View) imageView, "image1"),
+                Pair.create((View) fab, "fab1"));
+        startActivity(intent, options.toBundle());
     }
 
     private void animate() {

@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ui="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/test"
+        android:layout_centerInParent="true"
+        android:transitionName="image1"/>
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:text="Test"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:visibility="gone"/>
 
     <test.cbuitest.MyCustomView
+        android:id="@+id/myCsutomView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ui:circlecolor="#009688"
-        android:id="@+id/myCsutomView"/>
+        android:visibility="gone"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -25,6 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:transitionName="fab1"
         android:src="@android:drawable/ic_dialog_email" />
 
 </RelativeLayout>
