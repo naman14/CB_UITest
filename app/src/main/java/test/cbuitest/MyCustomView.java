@@ -18,7 +18,7 @@ public class MyCustomView extends View {
     Path path;
     Context context;
     int color;
-    float radius;
+    float radius = 0;
 
     public MyCustomView(Context context) {
         super(context);
@@ -46,17 +46,16 @@ public class MyCustomView extends View {
         this.context = context;
 
         paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(15);
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
 
-        path = new Path();
-        path.moveTo(0,0);
-        path.lineTo(500, 0);
-        path.lineTo(500, 1000);
-        path.lineTo(1000, 1000);
-        path.lineTo(0,0);
-        path.close();
+//        path = new Path();
+//        path.moveTo(0,0);
+//        path.lineTo(500, 0);
+//        path.lineTo(500, 1000);
+//        path.lineTo(1000, 1000);
+//        path.lineTo(0,0);
+//        path.close();
 
     }
 
@@ -65,8 +64,13 @@ public class MyCustomView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawCircle(300, 300, radius, paint);
+        canvas.drawCircle(getWidth()/2, getHeight()/2, radius, paint);
 //        canvas.drawPath(path, paint);
+    }
+
+    private void setRadius(float newRadius) {
+        this.radius = newRadius;
+        invalidate();
     }
 
     @Override
